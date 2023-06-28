@@ -386,7 +386,7 @@ public class WeatherLinkLiveGUIController
 			
 			try
 			{
-				Gauge humidityIn = buildHumidityGauge(wllDeviceId, sensorGarageEnv, StoredDataTypes.hum_in, "Garage");
+				Gauge humidityIn = buildHumidityGauge(wllDeviceId, sensorGarageEnv, StoredDataTypes.hum_in, "Inside");
 				Platform.runLater(() -> {
 					if (middleFlowPane == null)
 					{
