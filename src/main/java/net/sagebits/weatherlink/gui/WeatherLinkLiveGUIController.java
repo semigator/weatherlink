@@ -366,7 +366,7 @@ public class WeatherLinkLiveGUIController
 			
 			try
 			{
-				Gauge t2 = buildTempGauge(wllDeviceId, sensorGarageEnv, "Garage", StoredDataTypes.temp_in, StoredDataTypes.heat_index_in, 
+				Gauge t2 = buildTempGauge(wllDeviceId, sensorGarageEnv, "Inside", StoredDataTypes.temp_in, StoredDataTypes.heat_index_in, 
 						StoredDataTypes.dew_point_in, null, null);
 				Platform.runLater(() -> {
 					if (middleFlowPane == null)
