@@ -282,7 +282,7 @@ public class WeatherLinkLiveGUIController
 				try
 				{
 					Gauge t1 = buildTempGauge(wllDeviceId, sensorOutdoor, "Outside", StoredDataTypes.temp, StoredDataTypes.heat_index, 
-							StoredDataTypes.dew_point, StoredDataTypes.wind_chill, StoredDataTypes.thw_index);
+							StoredDataTypes.dew_point, StoredDataTypes.wind_chill, StoredDataTypes.thsw_index);
 					Platform.runLater(() -> {
 						if (middleFlowPane == null)
 						{
@@ -740,7 +740,7 @@ public class WeatherLinkLiveGUIController
 		Marker heatIndexM = heatIndex == null ? null : new Marker(0.0, "Heat Index", Color.RED, MarkerType.TRIANGLE);
 		Marker windChillM = windChill == null ? null : new Marker(0.0, "Wind Chill", Color.BLUE, MarkerType.TRIANGLE);
 		Marker dewPointM = dewPoint == null ? null : new Marker(0.0, "Dew Point", Color.CADETBLUE, MarkerType.TRIANGLE);
-		Marker tempHeatWindM = tempHeatWind == null ? null : new Marker(0.0, "Temp Heat Wind", Color.LAWNGREEN, MarkerType.TRIANGLE);
+		Marker tempHeatWindM = tempHeatWind == null ? null : new Marker(0.0, "Temp Heat Sun Wind", Color.LAWNGREEN, MarkerType.TRIANGLE);
 		
 		markers.add(mMin);
 		markers.add(mMax);
