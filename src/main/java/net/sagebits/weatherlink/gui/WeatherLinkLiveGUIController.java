@@ -301,7 +301,7 @@ public class WeatherLinkLiveGUIController
 
 				try
 				{
-					Gauge uvIndex = buildUvGauge(wllDeviceId, sensorOutdoor, StoredDataTypes.uv_index, "UV");
+					Gauge uvIndex = buildUvGauge(wllDeviceId, sensorOutdoor, StoredDataTypes.uv_index, "Index");
 					Platform.runLater(() -> {
 						if (middleFlowPane == null)
 						{
