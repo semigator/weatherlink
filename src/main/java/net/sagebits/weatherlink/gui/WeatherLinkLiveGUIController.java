@@ -660,7 +660,7 @@ public class WeatherLinkLiveGUIController
 				.sections(avgTen1, avgTen2, avgTwo1, avgTwo2, avgOne1, avgOne2)
 				.sectionsVisible(true)
 				.ledColor(Color.RED)
-				.ledVisible(false)
+				.ledVisible(true)
 				.build();
 
 		WeatherProperty windDirP = DataFetcher.getInstance().getDataFor(wllDeviceId, sensorId, StoredDataTypes.wind_dir_last);
