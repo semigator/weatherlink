@@ -656,11 +656,11 @@ public class WeatherLinkLiveGUIController
 				.needleBehavior(NeedleBehavior.OPTIMIZED)
 				.tickLabelColor(Gauge.DARK_COLOR)
 				.animated(true)
-				.animationDuration(200)
+				.animationDuration(100)
 				.sections(avgTen1, avgTen2, avgTwo1, avgTwo2, avgOne1, avgOne2)
 				.sectionsVisible(true)
 				.ledColor(Color.RED)
-				.ledVisible(true)
+				.ledVisible(false)
 				.build();
 
 		WeatherProperty windDirP = DataFetcher.getInstance().getDataFor(wllDeviceId, sensorId, StoredDataTypes.wind_dir_last);
