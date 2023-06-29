@@ -655,7 +655,7 @@ public class WeatherLinkLiveGUIController
 				.needleType(NeedleType.BIG)
 				.needleBehavior(NeedleBehavior.OPTIMIZED)
 				.tickLabelColor(Gauge.DARK_COLOR)
-				.animated(true)
+				.animated(false)
 				.animationDuration(50)
 				.sections(avgTen1, avgTen2, avgTwo1, avgTwo2, avgOne1, avgOne2)
 				.sectionsVisible(true)
