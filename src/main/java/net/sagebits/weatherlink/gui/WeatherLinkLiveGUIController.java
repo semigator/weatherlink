@@ -301,6 +301,24 @@ public class WeatherLinkLiveGUIController
 
 				try
 				{
+					Gauge humidityOut = buildHumidityGauge(wllDeviceId, sensorOutdoor, StoredDataTypes.hum, "Outside");
+					Platform.runLater(() -> {
+						if (middleFlowPane == null)
+						{
+							middleFlowPane = new FlowPane();
+							bp.centerProperty().set(middleFlowPane);
+						}
+						humidityOut.prefWidthProperty().bind(middleFlowPane.widthProperty().multiply(0.24));
+						humidityOut.prefHeightProperty().bind(humidityOut.prefWidthProperty());
+						middleFlowPane.getChildren().add(humidityOut);
+					});
+				}
+				catch (Exception e)
+				{
+					log.error("Problem building Gauge", e);
+				}
+				try
+				{
 					Gauge uvIndex = buildUvGauge(wllDeviceId, sensorOutdoor, StoredDataTypes.uv_index, "Index");
 					Platform.runLater(() -> {
 						if (middleFlowPane == null)
@@ -356,24 +374,6 @@ public class WeatherLinkLiveGUIController
 					log.error("Problem building wind Chart", e);
 				}
 				
-				try
-				{
-					Gauge humidityOut = buildHumidityGauge(wllDeviceId, sensorOutdoor, StoredDataTypes.hum, "Outside");
-					Platform.runLater(() -> {
-						if (middleFlowPane == null)
-						{
-							middleFlowPane = new FlowPane();
-							bp.centerProperty().set(middleFlowPane);
-						}
-						humidityOut.prefWidthProperty().bind(middleFlowPane.widthProperty().multiply(0.24));
-						humidityOut.prefHeightProperty().bind(humidityOut.prefWidthProperty());
-						middleFlowPane.getChildren().add(humidityOut);
-					});
-				}
-				catch (Exception e)
-				{
-					log.error("Problem building Gauge", e);
-				}
 			}
 			else
 			{
@@ -738,8 +738,8 @@ public class WeatherLinkLiveGUIController
 	
 	private Gauge buildHumidityGauge(String wllDeviceId, String sensorId, StoredDataTypes humiditySensor, String title)
 	{
-		Gauge gauge = GaugeBuilder.create().unit(title).title("% Hum").decimals(0).minValue(0).maxValue(100)
-				.thresholdVisible(false).animated(true).skinType(SkinType.SIMPLE_SECTION)
+		Gauge gauge = GaugeBuilder.create().unit(title).title("% Hum").decimals(1).minValue(0).maxValue(100)
+				.thresholdVisible(false).animated(true).barColor(Color.BLUE).skinType(SkinType.DASHBOARD)
 				.minSize(75, 75).build();
 
 		WeatherProperty humidity = DataFetcher.getInstance().getDataFor(wllDeviceId, sensorId, humiditySensor);
@@ -753,7 +753,7 @@ public class WeatherLinkLiveGUIController
 	private Gauge buildUvGauge(String wllDeviceId, String sensorId, StoredDataTypes uV, String title)
 	{
 		Gauge gauge = GaugeBuilder.create().unit(title).title("UV").decimals(1).minValue(0).maxValue(15)
-				.thresholdVisible(false).animated(true).skinType(SkinType.SIMPLE_SECTION)
+				.thresholdVisible(false).animated(true).barColor(Color.ORANGE).skinType(SkinType.FLAT)
 				.minSize(75, 75).build();
 
 		WeatherProperty uvindex = DataFetcher.getInstance().getDataFor(wllDeviceId, sensorId, uV);
@@ -936,14 +936,15 @@ public class WeatherLinkLiveGUIController
 		Series<Long, Double> series1 = new Series<>();
 		series1.setName("Outdoor Temp");
 		
-		XYChart<GapNumberAxis, GapNumberAxis> chart = createHourChart(24, true, series1); 
+		XYChart<GapNumberAxis, GapNumberAxis> chart = createHourChart(12, true, series1);
+		GapNumberAxis.class.cast(chart.getYAxis()).setForceZeroInRange(false); 
 		
 		Runnable updateData = () ->
 		{
 			try
 			{
 				log.debug("Updating outdoor temp chart");
-				long startTime =  System.currentTimeMillis() - (24*60*60*1000);
+				long startTime =  System.currentTimeMillis() - (12*60*60*1000);
 				List<Object[]> data = PeriodicData.getInstance().getDataForRange(wllDeviceId, sensorId, startTime, 
 						Optional.empty(), StoredDataTypes.temp);
 				
