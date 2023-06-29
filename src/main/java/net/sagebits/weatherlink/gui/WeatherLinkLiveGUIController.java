@@ -327,7 +327,7 @@ public class WeatherLinkLiveGUIController
 							middleFlowPane = new FlowPane();
 							bp.centerProperty().set(middleFlowPane);
 						}
-						chart.prefWidthProperty().bind(middleFlowPane.widthProperty().multiply(0.48));
+						chart.prefWidthProperty().bind(middleFlowPane.widthProperty().multiply(0.24));
 						chart.prefHeightProperty().bind(chart.prefWidthProperty().divide(2.0));
 						middleFlowPane.getChildren().add(chart);
 					});
@@ -346,7 +346,7 @@ public class WeatherLinkLiveGUIController
 							middleFlowPane = new FlowPane();
 							bp.centerProperty().set(middleFlowPane);
 						}
-						chart.prefWidthProperty().bind(middleFlowPane.widthProperty().multiply(0.48));
+						chart.prefWidthProperty().bind(middleFlowPane.widthProperty().multiply(0.24));
 						chart.prefHeightProperty().bind(chart.prefWidthProperty().divide(2.0));
 						middleFlowPane.getChildren().add(chart);
 					});
