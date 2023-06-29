@@ -298,7 +298,26 @@ public class WeatherLinkLiveGUIController
 				{
 					log.error("Problem building Gauge", e);
 				}
-				
+
+				try
+				{
+					Gauge uvIndex = buildUvGauge(wllDeviceId, sensorOutdoor, StoredDataTypes.uv_index, "UV");
+					Platform.runLater(() -> {
+						if (middleFlowPane == null)
+						{
+							middleFlowPane = new FlowPane();
+							bp.centerProperty().set(middleFlowPane);
+						}
+						uvIndex.prefWidthProperty().bind(middleFlowPane.widthProperty().multiply(0.24));
+						uvIndex.prefHeightProperty().bind(uvIndex.prefWidthProperty());
+						middleFlowPane.getChildren().add(uvIndex);
+					});
+				}
+				catch (Exception e)
+				{
+					log.error("Problem building Gauge", e);
+				}
+
 				try
 				{
 					Chart chart = createTempChart(wllDeviceId, sensorOutdoor);
@@ -730,6 +749,21 @@ public class WeatherLinkLiveGUIController
 
 		return gauge;
 	}
+
+	private Gauge buildUvGauge(String wllDeviceId, String sensorId, StoredDataTypes uV, String title)
+	{
+		Gauge gauge = GaugeBuilder.create().unit(title).title("UV").decimals(1).minValue(0).maxValue(15)
+				.thresholdVisible(false).animated(true).skinType(SkinType.SIMPLE_SECTION)
+				.minSize(75, 75).build();
+
+		WeatherProperty uvindex = DataFetcher.getInstance().getDataFor(wllDeviceId, sensorId, uV);
+
+		gauge.valueProperty().bind(uvindex.asDouble());
+		gauge.valueVisibleProperty().bind(uvindex.isValid());
+
+		return gauge;
+	}
+
 
 	private Gauge buildTempGauge(String wllDeviceId, String sensorId, String title, StoredDataTypes sdt, StoredDataTypes heatIndex, 
 			StoredDataTypes dewPoint, StoredDataTypes windChill, StoredDataTypes tempHeatWind)
