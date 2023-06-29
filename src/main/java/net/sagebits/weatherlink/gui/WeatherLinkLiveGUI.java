@@ -41,8 +41,8 @@ public class WeatherLinkLiveGUI extends Application
 					Scene scene = new Scene((Parent) loader.load(WeatherLinkLiveGUI.class.getResourceAsStream("/fxml/gui.fxml")));
 					mainStage_.setScene(scene);
 					mainStage_.sizeToScene();
-					mainStage_.setMinHeight(210);
-					mainStage_.setMinWidth(210);
+					mainStage_.setMinHeight(420);
+					mainStage_.setMinWidth(420);
 					wllc_ = loader.getController();
 					wllc_.finishInit(mainStage_);
 					//		mainStage_.getIcons().add(Images.APPLICATION.getImage());
