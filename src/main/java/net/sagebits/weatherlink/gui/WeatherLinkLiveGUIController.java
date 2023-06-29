@@ -282,7 +282,7 @@ public class WeatherLinkLiveGUIController
 				try
 				{
 					Gauge t1 = buildTempGauge(wllDeviceId, sensorOutdoor, "Outside", StoredDataTypes.temp, StoredDataTypes.heat_index, 
-							StoredDataTypes.dew_point, StoredDataTypes.wind_chill, StoredDataTypes.thsw_index);
+							StoredDataTypes.wet_bulb, StoredDataTypes.wind_chill, StoredDataTypes.thsw_index);
 					Platform.runLater(() -> {
 						if (middleFlowPane == null)
 						{
