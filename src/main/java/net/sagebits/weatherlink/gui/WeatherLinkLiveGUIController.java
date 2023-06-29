@@ -893,6 +893,7 @@ public class WeatherLinkLiveGUIController
 		periodicJobs.scheduleAtFixedRate(updateData, 0, 5, TimeUnit.MINUTES);
 		chart.setTitle("Wind Speed Avg and Gust");
 		chart.setLegendVisible(false);
+		chart.setMinSize(100,  100);
 		return chart;
 	}
 	
@@ -935,6 +936,7 @@ public class WeatherLinkLiveGUIController
 		periodicJobs.scheduleAtFixedRate(updateData, 0, 5, TimeUnit.MINUTES);
 		chart.setTitle("Outdoor Temp");
 		chart.setLegendVisible(false);
+		chart.setMinSize(100,  100);
 		return chart;
 	}
 	
