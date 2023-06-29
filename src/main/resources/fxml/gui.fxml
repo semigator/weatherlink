@@ -4,7 +4,7 @@
 <?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="210.0" minWidth="210.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #cad1d9);;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.sagebits.weatherlink.gui.WeatherLinkLiveGUIController">
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="210.0" minWidth="210.0" prefHeight="1200.0" prefWidth="1600.0" style="-fx-background-color: linear-gradient(to bottom, #ffffff, #cad1d9);;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.sagebits.weatherlink.gui.WeatherLinkLiveGUIController">
    <center>
       <ProgressIndicator minHeight="200.0" minWidth="200.0" BorderPane.alignment="CENTER">
          <BorderPane.margin>
