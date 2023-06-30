@@ -639,7 +639,7 @@ public class WeatherLinkLiveGUIController
 			else
 			{
 				gauge.setKnobColor(Color.GREEN);
-				tt.setText("Live Last Update " + sdf.format(new Date(currentWind.getTimeStamp())));
+//				tt.setText("Live Last Update " + sdf.format(new Date(currentWind.getTimeStamp())));
 			}
 		};
 
