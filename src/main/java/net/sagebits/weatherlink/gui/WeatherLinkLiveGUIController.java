@@ -617,8 +617,8 @@ public class WeatherLinkLiveGUIController
 		twoMA.valueProperty().bind(DataFetcher.getInstance().getDataFor(wllDeviceId, sensorOutdoorId, StoredDataTypes.wind_speed_avg_last_2_min).asDouble());
 		oneMA.valueProperty().bind(DataFetcher.getInstance().getDataFor(wllDeviceId, sensorOutdoorId, StoredDataTypes.wind_speed_avg_last_1_min).asDouble());
 		
-		Tooltip tt = new Tooltip("Mode Pending");
-		Tooltip.install(gauge, tt);
+//		Tooltip tt = new Tooltip("Mode Pending");
+//		Tooltip.install(gauge, tt);
 		final SimpleDateFormat sdf = new SimpleDateFormat("h:mm:ss");
 		
 		final Consumer<Void> updateTooltip = input -> 
@@ -628,13 +628,13 @@ public class WeatherLinkLiveGUIController
 			{
 				//More than 6 seconds out of date, missed at least 2 live data pulses.
 				gauge.setKnobColor(Color.BLACK);
-				tt.setText("Poll Last Update " + sdf.format(new Date(currentWind.getTimeStamp())));
+//				tt.setText("Poll Last Update " + sdf.format(new Date(currentWind.getTimeStamp())));
 			}
 			else if (currentWind.getTimeStamp() < (System.currentTimeMillis() - 30000))
 			{
 				//More than 30 seconds for any data.
 				gauge.setKnobColor(Color.RED);
-				tt.setText("Last Update " + sdf.format(new Date(currentWind.getTimeStamp())));
+//				tt.setText("Last Update " + sdf.format(new Date(currentWind.getTimeStamp())));
 			}
 			else
 			{
