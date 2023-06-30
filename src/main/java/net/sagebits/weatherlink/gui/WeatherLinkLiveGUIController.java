@@ -774,13 +774,13 @@ public class WeatherLinkLiveGUIController
 	private Gauge buildUvGauge(String wllDeviceId, String sensorId, StoredDataTypes uV, String title)
 	{
 				
-		Gauge gauge = GaugeBuilder.create().unit(title).title("UV").decimals(1).minValue(0).maxValue(14)
+		Gauge gauge = GaugeBuilder.create().unit(title).title("UV Index").decimals(1).minValue(0).maxValue(14)
 				.thresholdVisible(false).animated(true).barColor(Color.RED).skinType(SkinType.FLAT)
 				.minSize(75, 75).build();
 
 		WeatherProperty uvindex = DataFetcher.getInstance().getDataFor(wllDeviceId, sensorId, uV);
 
-		Tooltip t = new Tooltip(uvindex.asDouble().multiply(.428571).get() + " Minutes to Burn");
+		Tooltip t = new Tooltip(Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn");
 		Tooltip.install(gauge, t);		
 		
 		gauge.valueProperty().bind(uvindex.asDouble());
