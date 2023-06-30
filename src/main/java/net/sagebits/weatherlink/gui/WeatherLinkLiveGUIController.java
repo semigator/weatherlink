@@ -774,6 +774,11 @@ public class WeatherLinkLiveGUIController
 	private Gauge buildUvGauge(String wllDeviceId, String sensorId, StoredDataTypes uV, String title)
 	{
 		SimpleDateFormat sdf = new SimpleDateFormat("h a");
+		@Override
+			public String toString(Number object)
+			{
+				return sdf.format(new Date(object.longValue())).toLowerCase();
+			}
 		
 		Gauge gauge = GaugeBuilder.create().unit(sdf).title("UV").decimals(1).minValue(0).maxValue(14)
 				.thresholdVisible(false).animated(true).barColor(Color.RED).skinType(SkinType.FLAT)
