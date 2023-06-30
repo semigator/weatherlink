@@ -773,7 +773,7 @@ public class WeatherLinkLiveGUIController
 
 	private Gauge buildUvGauge(String wllDeviceId, String sensorId, StoredDataTypes uV, String title)
 	{
-		Gauge gauge = GaugeBuilder.create().unit(title).title("UV").decimals(1).minValue(0).maxValue(15)
+		Gauge gauge = GaugeBuilder.create().unit(title).title("UV").decimals(1).minValue(0).maxValue(14)
 				.thresholdVisible(false).animated(true).barColor(Color.ORANGE).skinType(SkinType.FLAT)
 				.minSize(75, 75).build();
 
@@ -790,7 +790,7 @@ public class WeatherLinkLiveGUIController
 
 	private Gauge buildSolGauge(String wllDeviceId, String sensorId, StoredDataTypes solRad, String title)
 	{
-		Gauge gauge = GaugeBuilder.create().unit(title).title("Solar Rad").decimals(0).minValue(0).maxValue(1800)
+		Gauge gauge = GaugeBuilder.create().unit(title).title("Solar Rad").decimals(0).minValue(0).maxValue(1000)
 				.thresholdVisible(false).animated(true).barColor(Color.RED).skinType(SkinType.FLAT)
 				.minSize(75, 75).build();
 
