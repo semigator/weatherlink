@@ -653,7 +653,7 @@ public class WeatherLinkLiveGUIController
 		
 		LiveData.getInstance().getLastDataTime().addListener((value, old, newv) -> 
 		{
-//			updateTooltip.accept(null);
+			updateTooltip.accept(null);
 		});
 		
 		return gauge;
