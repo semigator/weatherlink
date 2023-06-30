@@ -780,11 +780,13 @@ public class WeatherLinkLiveGUIController
 
 		WeatherProperty uvindex = DataFetcher.getInstance().getDataFor(wllDeviceId, sensorId, uV);
 
-		Tooltip t = new Tooltip(uvindex.asDouble() + " Minutes to Burn");
-		Tooltip.install(gauge, t);
+		
 		
 		gauge.valueProperty().bind(uvindex.asDouble());
 		gauge.valueVisibleProperty().bind(uvindex.isValid());
+
+		Tooltip t = new Tooltip(guage.valueProperty() + " Minutes to Burn");
+		Tooltip.install(gauge, t);
 
 		return gauge;
 	}
