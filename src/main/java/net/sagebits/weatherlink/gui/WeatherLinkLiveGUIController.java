@@ -355,24 +355,6 @@ public class WeatherLinkLiveGUIController
 					log.error("Problem building temp Chart", e);
 				}
 				
-				try
-				{
-					Chart chart = createWindChart(wllDeviceId, sensorOutdoor);
-					Platform.runLater(() -> {
-						if (middleFlowPane == null)
-						{
-							middleFlowPane = new FlowPane();
-							bp.centerProperty().set(middleFlowPane);
-						}
-						chart.prefWidthProperty().bind(middleFlowPane.widthProperty().multiply(0.24));
-						chart.prefHeightProperty().bind(chart.prefWidthProperty().divide(2.0));
-						middleFlowPane.getChildren().add(chart);
-					});
-				}
-				catch (Exception e)
-				{
-					log.error("Problem building wind Chart", e);
-				}
 				
 			}
 			else
@@ -420,8 +402,28 @@ public class WeatherLinkLiveGUIController
 			catch (Exception e)
 			{
 				log.error("Problem building Gauge", e);
-			}	
-			
+			}
+	
+		
+				try
+				{
+					Gauge solRad = buildSolGauge(wllDeviceId, sensorOutdoor, StoredDataTypes.solar_rad, "W/m²");
+					Platform.runLater(() -> {
+						if (middleFlowPane == null)
+						{
+							middleFlowPane = new FlowPane();
+							bp.centerProperty().set(middleFlowPane);
+						}
+						solRad.prefWidthProperty().bind(middleFlowPane.widthProperty().multiply(0.24));
+						solRad.prefHeightProperty().bind(solRad.prefWidthProperty());
+						middleFlowPane.getChildren().add(solRad);
+					});
+				}
+				catch (Exception e)
+				{
+					log.error("Problem building Gauge", e);
+				}
+
 			//This call should be safe, if we have a wllDeviceId
 			String sensorGarageBar = DataFetcher.getInstance().getSensorsFor(wllDeviceId, StoredDataTypes.bar_absolute).iterator().next();
 			try
@@ -474,6 +476,25 @@ public class WeatherLinkLiveGUIController
 						}
 						chart.prefWidthProperty().bind(middleFlowPane.widthProperty().multiply(0.24));
 						chart.prefHeightProperty().bind(chart.prefWidthProperty());
+						middleFlowPane.getChildren().add(chart);
+					});
+				}
+				catch (Exception e)
+				{
+					log.error("Problem building wind Chart", e);
+				}
+
+				try
+				{
+					Chart chart = createWindChart(wllDeviceId, sensorOutdoor);
+					Platform.runLater(() -> {
+						if (middleFlowPane == null)
+						{
+							middleFlowPane = new FlowPane();
+							bp.centerProperty().set(middleFlowPane);
+						}
+						chart.prefWidthProperty().bind(middleFlowPane.widthProperty().multiply(0.24));
+						chart.prefHeightProperty().bind(chart.prefWidthProperty().divide(2.0));
 						middleFlowPane.getChildren().add(chart);
 					});
 				}
@@ -738,8 +759,8 @@ public class WeatherLinkLiveGUIController
 	
 	private Gauge buildHumidityGauge(String wllDeviceId, String sensorId, StoredDataTypes humiditySensor, String title)
 	{
-		Gauge gauge = GaugeBuilder.create().unit(title).title("% Hum").decimals(1).minValue(0).maxValue(100)
-				.thresholdVisible(false).animated(true).barColor(Color.BLUE).skinType(SkinType.DASHBOARD)
+		Gauge gauge = GaugeBuilder.create().unit(title).title("% Hum").decimals(0).minValue(0).maxValue(100)
+				.thresholdVisible(false).animated(true).barColor(Color.BLUE).skinType(SkinType.SIMPLE_SECTION)
 				.minSize(75, 75).build();
 
 		WeatherProperty humidity = DataFetcher.getInstance().getDataFor(wllDeviceId, sensorId, humiditySensor);
@@ -760,6 +781,23 @@ public class WeatherLinkLiveGUIController
 
 		gauge.valueProperty().bind(uvindex.asDouble());
 		gauge.valueVisibleProperty().bind(uvindex.isValid());
+
+		return gauge;
+	}
+
+
+
+
+	private Gauge buildSolGauge(String wllDeviceId, String sensorId, StoredDataTypes solRad, String title)
+	{
+		Gauge gauge = GaugeBuilder.create().unit(title).title("Solar Rad").decimals(0).minValue(0).maxValue(1800)
+				.thresholdVisible(false).animated(true).barColor(Color.RED).skinType(SkinType.FLAT)
+				.minSize(75, 75).build();
+
+		WeatherProperty solarRad = DataFetcher.getInstance().getDataFor(wllDeviceId, sensorId, solRad);
+
+		gauge.valueProperty().bind(solarRad.asDouble());
+		gauge.valueVisibleProperty().bind(solarRad.isValid());
 
 		return gauge;
 	}
