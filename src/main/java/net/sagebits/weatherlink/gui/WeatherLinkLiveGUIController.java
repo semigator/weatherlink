@@ -780,13 +780,22 @@ public class WeatherLinkLiveGUIController
 
 		WeatherProperty uvindex = DataFetcher.getInstance().getDataFor(wllDeviceId, sensorId, uV);
 		
-		Tooltip t = new Tooltip(Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn");
+		Tooltip t = new Tooltip(Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn1" + uvindex.asDouble().get());
 		Tooltip.install(gauge, t);		
 		
 		gauge.valueProperty().bind(uvindex.asDouble());
 		gauge.valueVisibleProperty().bind(uvindex.isValid());
 
-		uvindex.addListener(observable -> t.setText(Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn"));
+		uvindex.addListener(observable -> {
+			if (uvindex.asDouble().get() != 0.0)
+			{
+				t.setText(Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn2" + uvindex.asDouble().get());
+			}
+			else
+			{
+				t.setText("");
+			}
+		});
 
 
 		return gauge;
