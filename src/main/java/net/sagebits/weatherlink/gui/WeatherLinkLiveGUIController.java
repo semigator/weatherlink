@@ -787,8 +787,7 @@ public class WeatherLinkLiveGUIController
 		gauge.valueVisibleProperty().bind(uvindex.isValid());
 
 		uvindex.addListener(observable -> {
-			double thisone = uvindex.asDouble().get();
-			if (thisone > 0)
+			if (uvindex.asDouble().get() > 0)
 			{
 				t.setText(Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn");
 			}
