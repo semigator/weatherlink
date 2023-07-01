@@ -787,12 +787,12 @@ public class WeatherLinkLiveGUIController
 		gauge.valueVisibleProperty().bind(uvindex.isValid());
 
 		uvindex.addListener(observable -> {
-			double current = uvindex.asDouble().get();
-			if (current > 0)
+			double thisone = uvindex.asDouble().get();
+			if (thisone > 0)
 			{
-				t.setText(Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn"));
+				t.setText(Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn");
 			}
-			if (current = 0)
+			if (thisone = 0)
 			{
 				updateTooltip.accept(null);
 				
