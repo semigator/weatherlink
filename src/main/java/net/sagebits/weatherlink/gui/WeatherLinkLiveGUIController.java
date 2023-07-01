@@ -792,7 +792,7 @@ public class WeatherLinkLiveGUIController
 			{
 				t.setText(Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn");
 			}
-			if (thisone = 0)
+			else
 			{
 				updateTooltip.accept(null);
 				
