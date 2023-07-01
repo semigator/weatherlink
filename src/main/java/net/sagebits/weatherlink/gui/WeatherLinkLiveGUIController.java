@@ -780,7 +780,7 @@ public class WeatherLinkLiveGUIController
 
 		WeatherProperty uvindex = DataFetcher.getInstance().getDataFor(wllDeviceId, sensorId, uV);
 		
-		Tooltip t = new Tooltip(Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn1" + uvindex.asDouble().get());
+		Tooltip t = new Tooltip(Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn");
 		Tooltip.install(gauge, t);		
 		
 		gauge.valueProperty().bind(uvindex.asDouble());
@@ -789,7 +789,7 @@ public class WeatherLinkLiveGUIController
 		uvindex.addListener(observable -> {
 			if (uvindex.asDouble().get() != 0.0)
 			{
-				t.setText(Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn2" + uvindex.asDouble().get());
+				t.setText(Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn");
 			}
 			else
 			{
@@ -806,7 +806,7 @@ public class WeatherLinkLiveGUIController
 
 	private Gauge buildSolGauge(String wllDeviceId, String sensorId, StoredDataTypes solRad, String title)
 	{
-		Gauge gauge = GaugeBuilder.create().unit(title).title("Solar Rad").decimals(0).minValue(0).maxValue(1000)
+		Gauge gauge = GaugeBuilder.create().unit(title).title("Solar Rad").decimals(0).minValue(0).maxValue(1100)
 				.thresholdVisible(false).animated(true).barColor(Color.ORANGE).skinType(SkinType.FLAT)
 				.minSize(75, 75).build();
 
