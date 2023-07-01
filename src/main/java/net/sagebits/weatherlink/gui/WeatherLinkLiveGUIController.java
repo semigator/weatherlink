@@ -795,7 +795,7 @@ public class WeatherLinkLiveGUIController
 			{
 				updateTooltip.accept(null);
 				
-			}
+			});
 		return gauge;
 	}
 
