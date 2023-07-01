@@ -854,7 +854,7 @@ public class WeatherLinkLiveGUIController
 		}
 
 		@SuppressWarnings("unchecked") 
-		Gauge gauge = GaugeBuilder.create().unit("\u00B0F").title(title).titleColor(Color.GRAY).subTitle("Temp")
+		Gauge gauge = GaugeBuilder.create().title(title).titleColor(Color.GRAY).subTitle("Temp")
 				.decimals(1).minValue(20).maxValue(80).tickLabelDecimals(0).majorTickMarksVisible(true)
 				.tickMarkRingVisible(true)
 				.mediumTickMarksVisible(true)
