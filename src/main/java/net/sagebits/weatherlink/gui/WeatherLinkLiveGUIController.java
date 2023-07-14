@@ -282,7 +282,7 @@ public class WeatherLinkLiveGUIController
 				try
 				{
 					Gauge t1 = buildTempGauge(wllDeviceId, sensorOutdoor, "Outside", StoredDataTypes.temp, StoredDataTypes.heat_index, 
-							StoredDataTypes.wet_bulb, StoredDataTypes.wind_chill, StoredDataTypes.thw_index);
+							StoredDataTypes.wet_bulb, StoredDataTypes.wind_chill, StoredDataTypes.thsw_index);
 					Platform.runLater(() -> {
 						if (middleFlowPane == null)
 						{
@@ -780,7 +780,7 @@ public class WeatherLinkLiveGUIController
 
 		WeatherProperty uvindex = DataFetcher.getInstance().getDataFor(wllDeviceId, sensorId, uV);
 		
-		Tooltip t = new Tooltip(Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn");
+		Tooltip t = new Tooltip("   " + Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn   ");
 		Tooltip.install(gauge, t);		
 		
 		gauge.valueProperty().bind(uvindex.asDouble());
@@ -789,7 +789,7 @@ public class WeatherLinkLiveGUIController
 		uvindex.addListener(observable -> {
 			if (uvindex.asDouble().get() != 0.0)
 			{
-				t.setText(Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn");
+				t.setText("   " + Math.round(1 / uvindex.asDouble().multiply(.428571).get() * 60) + " Minutes to Burn   ");
 			}
 			else
 			{
@@ -827,8 +827,8 @@ public class WeatherLinkLiveGUIController
 		Marker mMax = new Marker(70.0, "Day Max", Color.RED, MarkerType.STANDARD);
 		Marker heatIndexM = heatIndex == null ? null : new Marker(0.0, "Heat Index", Color.RED, MarkerType.TRIANGLE);
 		Marker windChillM = windChill == null ? null : new Marker(0.0, "Wind Chill", Color.BLUE, MarkerType.TRIANGLE);
-		Marker dewPointM = dewPoint == null ? null : new Marker(0.0, "Wet Bulb", Color.CADETBLUE, MarkerType.TRIANGLE);
-		Marker tempHeatWindM = tempHeatWind == null ? null : new Marker(0.0, "Temp Heat Wind", Color.LAWNGREEN, MarkerType.TRIANGLE);
+		Marker dewPointM = dewPoint == null ? null : new Marker(0.0, "Dew Point", Color.CADETBLUE, MarkerType.TRIANGLE);
+		Marker tempHeatWindM = tempHeatWind == null ? null : new Marker(0.0, "Temp Heat Sun Wind", Color.LAWNGREEN, MarkerType.TRIANGLE);
 		
 		markers.add(mMin);
 		markers.add(mMax);
