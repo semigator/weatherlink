@@ -998,7 +998,7 @@ public class WeatherLinkLiveGUIController
 			try
 			{
 				log.debug("Updating outdoor temp chart");
-				long startTime =  System.currentTimeMillis() - (12*60*60*1000);
+				long startTime =  System.currentTimeMillis() - (24*60*60*1000);
 				List<Object[]> data = PeriodicData.getInstance().getDataForRange(wllDeviceId, sensorId, startTime, 
 						Optional.empty(), StoredDataTypes.temp);
 				
@@ -1057,7 +1057,7 @@ public class WeatherLinkLiveGUIController
 			try
 			{
 				log.debug("Updating bar chart");
-				long startTime = System.currentTimeMillis() - (12*60*60*1000);
+				long startTime = System.currentTimeMillis() - (24*60*60*1000);
 				
 				List<Object[]> data = PeriodicData.getInstance().getDataForRange(wllDeviceId, sensorId, startTime, 
 						Optional.empty(), StoredDataTypes.bar_sea_level);
