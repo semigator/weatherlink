@@ -827,7 +827,7 @@ public class WeatherLinkLiveGUIController
 		Marker mMax = new Marker(70.0, "Day Max", Color.RED, MarkerType.STANDARD);
 		Marker heatIndexM = heatIndex == null ? null : new Marker(0.0, "Heat Index", Color.RED, MarkerType.TRIANGLE);
 		Marker windChillM = windChill == null ? null : new Marker(0.0, "Wind Chill", Color.BLUE, MarkerType.TRIANGLE);
-		Marker dewPointM = dewPoint == null ? null : new Marker(0.0, "Dew Point", Color.CADETBLUE, MarkerType.TRIANGLE);
+		Marker dewPointM = dewPoint == null ? null : new Marker(0.0, "Wet Bulb", Color.CADETBLUE, MarkerType.TRIANGLE);
 		Marker tempHeatWindM = tempHeatWind == null ? null : new Marker(0.0, "Temp Heat Wind", Color.LAWNGREEN, MarkerType.TRIANGLE);
 		
 		markers.add(mMin);
