@@ -987,28 +987,6 @@ public class WeatherLinkLiveGUIController
 		return chart;
 	}
 	
-	private XYChart<GapNumberAxis, GapNumberAxis> createBarometerChart(String wllDeviceId, String sensorId) throws SQLException
-	{
-		Series<Long, Double> series1 = new Series<>();
-		series1.setName("Barometric Pressure");
-		XYChart<GapNumberAxis, GapNumberAxis> chart = createHourChart(12, true, series1); 
-		GapNumberAxis.class.cast(chart.getYAxis()).setForceZeroInRange(false);
-		GapNumberAxis.class.cast(chart.getYAxis()).setTickLabelFormatter(new StringConverter<Number>()
-		{
-			DecimalFormat df = new DecimalFormat("00.00");
-			@Override
-			public String toString(Number object)
-			{
-				
-				return df.format(object.doubleValue());
-			}
-
-			@Override
-			public Number fromString(String string)
-			{
-				throw new UnsupportedOperationException();
-			}
-		});;
 	private XYChart<GapNumberAxis, GapNumberAxis> createTempChart(String wllDeviceId, String sensorId) throws SQLException
 	{
 		Series<Long, Double> series1 = new Series<>();
@@ -1051,7 +1029,31 @@ public class WeatherLinkLiveGUIController
 		chart.setLegendVisible(false);
 		chart.setMinSize(75,  75);
 		return chart;
-	}		
+	}
+	
+	private XYChart<GapNumberAxis, GapNumberAxis> createBarometerChart(String wllDeviceId, String sensorId) throws SQLException
+	{
+		Series<Long, Double> series1 = new Series<>();
+		series1.setName("Barometric Pressure");
+		XYChart<GapNumberAxis, GapNumberAxis> chart = createHourChart(12, true, series1); 
+		GapNumberAxis.class.cast(chart.getYAxis()).setForceZeroInRange(false);
+		GapNumberAxis.class.cast(chart.getYAxis()).setTickLabelFormatter(new StringConverter<Number>()
+		{
+			DecimalFormat df = new DecimalFormat("00.00");
+			@Override
+			public String toString(Number object)
+			{
+				
+				return df.format(object.doubleValue());
+			}
+
+			@Override
+			public Number fromString(String string)
+			{
+				throw new UnsupportedOperationException();
+			}
+		});;
+		
 		Runnable updateData = () ->
 		{
 			try
