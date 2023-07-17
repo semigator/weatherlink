@@ -334,11 +334,11 @@ public class WeatherLinkLiveGUIController
 				catch (Exception e)
 				{
 					log.error("Problem building Gauge", e);
-				}
 
+				}
 				try
 				{
-					Chart chart = createTempChart(wllDeviceId, sensorOutdoor);
+					Chart chart = createWindChart(wllDeviceId, sensorOutdoor);
 					Platform.runLater(() -> {
 						if (middleFlowPane == null)
 						{
@@ -352,8 +352,9 @@ public class WeatherLinkLiveGUIController
 				}
 				catch (Exception e)
 				{
-					log.error("Problem building temp Chart", e);
+					log.error("Problem building wind Chart", e);
 				}
+
 				
 				
 			}
@@ -426,6 +427,24 @@ public class WeatherLinkLiveGUIController
 
 			//This call should be safe, if we have a wllDeviceId
 			String sensorGarageBar = DataFetcher.getInstance().getSensorsFor(wllDeviceId, StoredDataTypes.bar_absolute).iterator().next();
+				try
+				{
+					Chart chart = createTempChart(wllDeviceId, sensorOutdoor);
+					Platform.runLater(() -> {
+						if (middleFlowPane == null)
+						{
+							middleFlowPane = new FlowPane();
+							bp.centerProperty().set(middleFlowPane);
+						}
+						chart.prefWidthProperty().bind(middleFlowPane.widthProperty().multiply(0.24));
+						chart.prefHeightProperty().bind(chart.prefWidthProperty().divide(2.0));
+						middleFlowPane.getChildren().add(chart);
+					});
+				}
+				catch (Exception e)
+				{
+					log.error("Problem building temp Chart", e);
+				}
 			try
 			{
 				Chart chart = createBarometerChart(wllDeviceId, sensorGarageBar);
@@ -484,24 +503,7 @@ public class WeatherLinkLiveGUIController
 					log.error("Problem building wind Chart", e);
 				}
 
-				try
-				{
-					Chart chart = createWindChart(wllDeviceId, sensorOutdoor);
-					Platform.runLater(() -> {
-						if (middleFlowPane == null)
-						{
-							middleFlowPane = new FlowPane();
-							bp.centerProperty().set(middleFlowPane);
-						}
-						chart.prefWidthProperty().bind(middleFlowPane.widthProperty().multiply(0.24));
-						chart.prefHeightProperty().bind(chart.prefWidthProperty().divide(2.0));
-						middleFlowPane.getChildren().add(chart);
-					});
-				}
-				catch (Exception e)
-				{
-					log.error("Problem building wind Chart", e);
-				}
+
 			}
 			log.debug("Gui init thread ends");
 		}, "gui-init");
