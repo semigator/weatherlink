@@ -427,24 +427,6 @@ public class WeatherLinkLiveGUIController
 
 			//This call should be safe, if we have a wllDeviceId
 			String sensorGarageBar = DataFetcher.getInstance().getSensorsFor(wllDeviceId, StoredDataTypes.bar_absolute).iterator().next();
-				try
-				{
-					Chart chart = createTempChart(wllDeviceId, sensorOutdoor);
-					Platform.runLater(() -> {
-						if (middleFlowPane == null)
-						{
-							middleFlowPane = new FlowPane();
-							bp.centerProperty().set(middleFlowPane);
-						}
-						chart.prefWidthProperty().bind(middleFlowPane.widthProperty().multiply(0.24));
-						chart.prefHeightProperty().bind(chart.prefWidthProperty().divide(2.0));
-						middleFlowPane.getChildren().add(chart);
-					});
-				}
-				catch (Exception e)
-				{
-					log.error("Problem building temp Chart", e);
-				}
 			try
 			{
 				Chart chart = createBarometerChart(wllDeviceId, sensorGarageBar);
@@ -464,6 +446,25 @@ public class WeatherLinkLiveGUIController
 				log.error("Problem building barometric Chart", e);
 			}
 			
+				try
+				{
+					Chart chart = createTempChart(wllDeviceId, sensorOutdoor);
+					Platform.runLater(() -> {
+						if (middleFlowPane == null)
+						{
+							middleFlowPane = new FlowPane();
+							bp.centerProperty().set(middleFlowPane);
+						}
+						chart.prefWidthProperty().bind(middleFlowPane.widthProperty().multiply(0.24));
+						chart.prefHeightProperty().bind(chart.prefWidthProperty().divide(2.0));
+						middleFlowPane.getChildren().add(chart);
+					});
+				}
+				catch (Exception e)
+				{
+					log.error("Problem building temp Chart", e);
+				}
+
 			if (outdoorSensors.size() > 0)
 			{
 				try
